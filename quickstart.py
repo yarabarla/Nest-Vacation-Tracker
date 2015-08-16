@@ -1,10 +1,12 @@
-import httplib2
 import os
 
-from apiclient import discovery
 import oauth2client
 from oauth2client import client
 from oauth2client import tools
+from apiclient import errors
+import base64
+import email
+from apiclient import errors
 
 try:
     import argparse
@@ -48,7 +50,6 @@ def get_credentials():
 """Get a list of Messages from the user's mailbox.
 """
 
-from apiclient import errors
 
 
 def ListMessagesMatchingQuery(service, user_id, query=''):
@@ -114,15 +115,13 @@ def ListMessagesWithLabels(service, user_id, label_ids=[]):
 
     return messages
   except errors.HttpError, error:
-    print 'An error occurred: %s' % error    
+    print 'An error occurred: %s' % error
 
 
 """Get Message with given ID.
 """
 
-import base64
-import email
-from apiclient import errors
+
 
 def GetMessage(service, user_id, msg_id):
   """Get a Message with given ID.
@@ -177,38 +176,4 @@ def GetMimeMessage(service, user_id, msg_id):
         return mime_msg.get_payload()
 
   except errors.HttpError, error:
-    print 'An error occurred: %s' % error    
-
-def main():
-    """Shows basic usage of the Gmail API.
-
-    Creates a Gmail API service object and outputs a list of label names
-    of the user's Gmail account.
-    """
-    credentials = get_credentials()
-    http = credentials.authorize(httplib2.Http())
-    service = discovery.build('gmail', 'v1', http=http)
-
-    results = service.users().labels().list(userId='me').execute()
-    messageIds = ListMessagesMatchingQuery(service, 'me', query='subject:Flight Confirmation')
-
-    datalist = []
-    times = []
-    outputTxt = open("out.txt", "w")
-    for message in messageIds:
-        datalist.append(GetMimeMessage(service, 'me', message[u'id']))
-        messageX = datalist[-1]
-        outputTxt.write("New Message: ----")
-        outputTxt.write(messageX)
-    #print message
-    #labels = results.get('labels', [])
-
-    #if not labels:
-        #print 'No labels found.'
-    #else:
-      #print 'Labels:'
-      #for label in labels:
-        #print label['name']
-
-if __name__ == '__main__':
-    main()
+    print 'An error occurred: %s' % error
