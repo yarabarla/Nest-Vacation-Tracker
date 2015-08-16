@@ -19,6 +19,9 @@ Step 1: Get ticket from Gmail
 
 Step 2: Extract information from email and supply it as a JSON object
 
+![terminal flightinfo](https://cloud.githubusercontent.com/assets/8474465/9294847/5b735d5e-4427-11e5-8d9e-ea003cd6ccc7.png)
+
+
 ![jsonobject](https://cloud.githubusercontent.com/assets/8474465/9294830/be4858b8-4426-11e5-8cfe-d3f400b2455c.png)
 
 Step 3: Nest Magic!
