@@ -26,7 +26,7 @@ $(document).ready(function() {
     var interval = setInterval(function () {
         if ($(".add-device-deck-item").length) {
             clearInterval(interval);
-            $(html).insertBefore(".add-device-deck-item");
+            $(html).insertBefore("li.add-device-deck-item");
         }
     });
 });
