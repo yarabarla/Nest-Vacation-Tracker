@@ -12,11 +12,12 @@ module.exports = function(flight, startEnd) {
     // Change temperature to non-freezing
     nest.getZip(function(err, zip) {
       weather.getTemperature(zip, function(err, avgTemp) {
-        if (avgTemp < 50) {
-          // Set to heat at target 50
+        console.log('changing temp');
+        if (avgTemp < 60) {
+          // Set to heat at target 60
           request
             .put('https://developer-api.nest.com/devices/thermostats/z3WfD_k2XQFwte0Yz9jf7ow3-aqdy0De?auth=c.62NNoDDdtN2goM9hiBpVL4S8JtUjo0deSqp48VvP4jnjG8en1sWDkXthjubMvxMlszVMkwiBxtQWyrhrd3ovrIBVklZMcmKBF8goYQo2rmZfXNqOQtWhAw8dFaSoQ10pyNzCHAG2I2CMmeG6')
-            .send({"hvac_mode": "heat", "target_temperature_f": 50})
+            .send({"hvac_mode": "heat", "target_temperature_f": 60})
             .set('Accept', 'application/json')
             .end(function(err, res){
             });

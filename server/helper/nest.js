@@ -4,7 +4,9 @@ var ALL_URL = 'https://developer-api.nest.com/?auth=c.62NNoDDdtN2goM9hiBpVL4S8Jt
 module.exports = {
   getZip: function(cb) {
     request(ALL_URL, function (error, response, body) {
-      cb(error, body);
+      var structures = JSON.parse(body).structures;
+      var postalCode = structures[Object.keys(structures)[0]].postal_code;
+      cb(error, postalCode);
     })
   }
 };

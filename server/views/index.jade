@@ -2,4 +2,9 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  form(action='/start' method='post')
+    input(type='text' placeholder='num days' name='days')
+    input(type='text' placeholder='dest' name='dest')
+    input(type='submit' value='Start')
+  form(action='/stop' method='post')
+    input(type='submit' value='Stop')
