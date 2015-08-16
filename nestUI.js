@@ -7,14 +7,15 @@
 
 $(document).ready(function() {
     //assume equipment size is 3 tons per household   
-    var equipmentSize = 3
+    var equipmentSize = 3;
     //average electric rate for the US
-    var averageElectricRate = 17.5
+    var averageElectricRate = 17.5;
     //hours per day unit is on
-    var hoursPerDay = 5
+    var hoursPerDay = 5;
     //SEER efficiency rating
-    var seer = 10
-    var cost = (days*averageElectricRate*hoursPerDay) / equipmentSize / seer    
+    var seer = 10;
+    var days = 31;
+    var cost = Math.round((days*averageElectricRate*hoursPerDay) / equipmentSize / seer * 100)/100;
 
     var html = '<div class="price-saver" style="color:white">' +
         '<h2 class="mode-title">' +
