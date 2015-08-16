@@ -6,7 +6,16 @@
 // ==/UserScript==
 
 $(document).ready(function() {
-    var cost = 100;
+    //assume equipment size is 3 tons per household   
+    var equipmentSize = 3
+    //average electric rate for the US
+    var averageElectricRate = 17.5
+    //hours per day unit is on
+    var hoursPerDay = 5
+    //SEER efficiency rating
+    var seer = 10
+    var cost = (days*averageElectricRate*hoursPerDay) / equipmentSize / seer    
+
     var html = '<div class="price-saver" style="color:white">' +
         '<h2 class="mode-title">' +
         'You have saved $' + cost + ' from turning off your HVAC during your vacation! ' +
