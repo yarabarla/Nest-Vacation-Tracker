@@ -6,7 +6,7 @@
 // ==/UserScript==
 
 $(document).ready(function() {
-    //assume equipment size is 3 tons per household   
+    //assume equipment size is 3 tons per household
     var equipmentSize = 3;
     //average electric rate for the US
     var averageElectricRate = 17.5;
@@ -22,11 +22,11 @@ $(document).ready(function() {
         'You have saved $' + cost + ' from turning off your HVAC during your vacation! ' +
         'Now go treat yourself!' +
         '</h2> </div>';
-  
+
     var interval = setInterval(function () {
         if ($(".add-device-deck-item").length) {
             clearInterval(interval);
-            $(html).insertBefore(".add-device-deck-item");
+            $(html).insertBefore("li.add-device-deck-item");
         }
     });
 });
