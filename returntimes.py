@@ -16,14 +16,11 @@ def main():
     messageIds = M.ListMessagesMatchingQuery(service, 'me', query='subject:Flight Confirmation')
 
     datalist = []
-    times = []
     outputTxt = open("out.txt", "w")
     for message in messageIds:
         datalist.append(M.GetMimeMessage(service, 'me', message[u'id']))
-        messageX = datalist[-1]
-        outputTxt.write("New Message: ----")
-        outputTxt.write(messageX)
 
 if __name__ == '__main__':
     main()
+
 
