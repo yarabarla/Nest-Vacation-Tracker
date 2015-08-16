@@ -9,17 +9,5 @@ module.exports = {
       var avgTempF = (avgTempK - 273.15) * 9 / 5 + 32;
       cb(error, avgTempF);
     })
-  }
-
-  getCostSavings: function(days) {
-    //assume equipment size is 3 tons per household   
-    var equipmentSize = 3
-    //average electric rate for the US
-    var averageElectricRate = 17.5
-    //hours per day unit is on
-    var hoursPerDay = 5
-    //SEER efficiency rating
-    var seer = 10
-    return (days*averageElectricRate*hoursPerDay) / equipmentSize / seer
-  }
+  } 
 };
