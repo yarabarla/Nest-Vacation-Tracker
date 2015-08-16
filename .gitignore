@@ -1,5 +1,6 @@
 # Raw email output text 
 *.txt
+*.pyc
 # Logs
 logs
 *.log
