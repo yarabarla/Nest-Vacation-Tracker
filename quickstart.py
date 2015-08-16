@@ -95,7 +95,7 @@ def GetMimeMessage(service, user_id, msg_id):
     message = service.users().messages().get(userId=user_id, id=msg_id,
                                              format='raw').execute()
 
-    print 'Message snippet: %s' % message['snippet']
+    #print 'Message snippet: %s' % message['snippet']
 
     msg_str = base64.urlsafe_b64decode(message['raw'].encode('ASCII'))
 
