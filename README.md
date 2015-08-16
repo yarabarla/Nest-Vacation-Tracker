@@ -18,6 +18,7 @@ Finally, for additional peace of mind, we integrated the Twilio API to text you 
 then...
 
 ```sh
+cd server
 sudo npm install
 phone='1231231231' npm start
 ```
