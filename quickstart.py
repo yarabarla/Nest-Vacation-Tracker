@@ -190,6 +190,7 @@ def main():
     service = discovery.build('gmail', 'v1', http=http)
 
     results = service.users().labels().list(userId='me').execute()
+<<<<<<< HEAD
     messageIds = ListMessagesMatchingQuery(service, 'me', query='subject:Flight Confirmation')
 
     datalist = []
@@ -209,6 +210,37 @@ def main():
       #print 'Labels:'
       #for label in labels:
         #print label['name']
+||||||| merged common ancestors
+    print ListMessagesMatchingQuery(service, "akhileshyarabarla@gmail.com", "from:flightstatus@t.spiritairlines.com")
+    """labels = results.get('labels', [])
+
+    if not labels:
+        print 'No labels found.'
+    else:
+      print 'Labels:'
+      for label in labels:
+        print label['name']"""
+=======
+    messageIds = ListMessagesMatchingQuery(service, 'me', query='subject:Flight Confirmation')
+
+    datalist = []
+    times = []
+    outputTxt = open("out.txt", "w")
+    for message in messageIds:
+        datalist.append(GetMimeMessage(service, 'me', message[u'id']))
+    message = datalist[0]
+    outputTxt.write("New Message: ")
+    outputTxt.write(message)
+    #print message
+    #labels = results.get('labels', [])
+
+    #if not labels:
+        #print 'No labels found.'
+    #else:
+      #print 'Labels:'
+      #for label in labels:
+        #print label['name']
+>>>>>>> c6227cfbb0012f1dc86acde3c72891521bdfa327
 
 
 if __name__ == '__main__':
