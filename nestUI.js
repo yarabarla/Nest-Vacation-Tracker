@@ -6,7 +6,6 @@
 // ==/UserScript==
 
 $(document).ready(function() {
-    console.log("Hit");
     var html = '<div class="price-saver" style="color:white">' +
       '<h2 class="mode-title">' + 
       'You have saved $ from turning off your HVAC during your vacation! ' +
