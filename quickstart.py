@@ -1,10 +1,11 @@
-import httplib2
 import os
-
-from apiclient import discovery
 import oauth2client
 from oauth2client import client
 from oauth2client import tools
+from apiclient import errors
+import base64
+import email
+from apiclient import errors
 
 try:
     import argparse
@@ -45,11 +46,6 @@ def get_credentials():
         print 'Storing credentials to ' + credential_path
     return credentials
 
-"""Get a list of Messages from the user's mailbox.
-"""
-
-from apiclient import errors
-
 
 def ListMessagesMatchingQuery(service, user_id, query=''):
   """List all Messages of the user's mailbox matching the query.
@@ -83,69 +79,6 @@ def ListMessagesMatchingQuery(service, user_id, query=''):
   except errors.HttpError, error:
     print 'An error occurred: %s' % error
 
-
-def ListMessagesWithLabels(service, user_id, label_ids=[]):
-  """List all Messages of the user's mailbox with label_ids applied.
-
-  Args:
-    service: Authorized Gmail API service instance.
-    user_id: User's email address. The special value "me"
-    can be used to indicate the authenticated user.
-    label_ids: Only return Messages with these labelIds applied.
-
-  Returns:
-    List of Messages that have all required Labels applied. Note that the
-    returned list contains Message IDs, you must use get with the
-    appropriate id to get the details of a Message.
-  """
-  try:
-    response = service.users().messages().list(userId=user_id,
-                                               labelIds=label_ids).execute()
-    messages = []
-    if 'messages' in response:
-      messages.extend(response['messages'])
-
-    while 'nextPageToken' in response:
-      page_token = response['nextPageToken']
-      response = service.users().messages().list(userId=user_id,
-                                                 labelIds=label_ids,
-                                                 pageToken=page_token).execute()
-      messages.extend(response['messages'])
-
-    return messages
-  except errors.HttpError, error:
-    print 'An error occurred: %s' % error    
-
-
-"""Get Message with given ID.
-"""
-
-import base64
-import email
-from apiclient import errors
-
-def GetMessage(service, user_id, msg_id):
-  """Get a Message with given ID.
-
-  Args:
-    service: Authorized Gmail API service instance.
-    user_id: User's email address. The special value "me"
-    can be used to indicate the authenticated user.
-    msg_id: The ID of the Message required.
-
-  Returns:
-    A Message.
-  """
-  try:
-    message = service.users().messages().get(userId=user_id, id=msg_id).execute()
-
-    print 'Message snippet: %s' % message['payload']
-
-    return message
-  except errors.HttpError, error:
-    print 'An error occurred: %s' % error
-
-
 def GetMimeMessage(service, user_id, msg_id):
   """Get a Message and use it to create a MIME Message.
 
@@ -177,39 +110,4 @@ def GetMimeMessage(service, user_id, msg_id):
         return mime_msg.get_payload()
 
   except errors.HttpError, error:
-    print 'An error occurred: %s' % error    
-
-def main():
-    """Shows basic usage of the Gmail API.
-
-    Creates a Gmail API service object and outputs a list of label names
-    of the user's Gmail account.
-    """
-    credentials = get_credentials()
-    http = credentials.authorize(httplib2.Http())
-    service = discovery.build('gmail', 'v1', http=http)
-
-    results = service.users().labels().list(userId='me').execute()
-    messageIds = ListMessagesMatchingQuery(service, 'me', query='subject:Flight Confirmation')
-
-    datalist = []
-    times = []
-    outputTxt = open("out.txt", "w")
-    for message in messageIds:
-        datalist.append(GetMimeMessage(service, 'me', message[u'id']))
-    message = datalist[0]
-    outputTxt.write("New Message: ")
-    outputTxt.write(message)
-    #print message
-    #labels = results.get('labels', [])
-
-    #if not labels:
-        #print 'No labels found.'
-    #else:
-      #print 'Labels:'
-      #for label in labels:
-        #print label['name']
-
-
-if __name__ == '__main__':
-    main()
+    print 'An error occurred: %s' % error
