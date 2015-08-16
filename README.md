@@ -1,5 +1,5 @@
 # Nest-Vacation-Tracker
-## Hack the Planet
+### Hack the Planet
 
 So you just booked a vacation and are super stoked about relaxing for a couple of weeks on your trip.  You get to the airport and realize that you forgot to manually set your Nest thermostat to off.  Oh no!  Now your vacation is off to a bad start and you can't get the thought of wasting all that money out of your head.  
 
