@@ -9,5 +9,5 @@ module.exports = {
       var avgTempF = (avgTempK - 273.15) * 9 / 5 + 32;
       cb(error, avgTempF);
     })
-  } 
+  }
 };

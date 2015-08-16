@@ -1,8 +1,8 @@
 {
   "flights": [
     {
-      "start_time": 9245923492,
-      "end_time": 9246923492,
+      "start_time": 1439739174620,
+      "end_time": 1439939174620,
       "start_location": "MTV",
       "end_location": "NYC"
     }

@@ -8,6 +8,7 @@ var request = require('request');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var updateTrip = require('./helper/updateTrip');
 
 var app = express();
 
@@ -59,9 +60,10 @@ app.use(function(err, req, res, next) {
 });
 
 // Run every so often
-var CRON_FREQUENCY = 5000;
+var CRON_FREQUENCY = 1000;
+fs = require('fs');
 setInterval(function() {
-  fs = require('fs')
+  console.log('ping: ' + new Date())
   fs.readFile('./data/flights.json', 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
@@ -73,11 +75,9 @@ setInterval(function() {
       var flight = flights[i];
       var now = +new Date();
       if (flight.start_time > now && flight.start_time <= now + CRON_FREQUENCY) {
-        // Flight is now, go message about it.
-        request('http://localhost:3000');
+        updateTrip(flight, 'start');
       } else if (flights.end_time - CRON_FREQUENCY >  now && flights.end_time < now) {
-        // Flight came back now, go message about it.
-        request('http://localhost:3000');
+        updateTrip(flight, 'end');
       }
     }
   });
